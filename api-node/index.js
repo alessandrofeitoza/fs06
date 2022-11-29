@@ -1,12 +1,12 @@
 //importando a biblioteca interna do node para mexer com a web
-const http = require('http2');
+const http = require('http');
 const rotas = require('./router');
 
 const servidor = 'localhost';
 const porta = '8000';
 
 //funcao que será executada assim que chegar uma requisicao
-function recepcao(req, res) {
+async function recepcao(req, res) {
 
     //testando se a url acessada foi definida no objeto de rotas criado acima
     if (undefined == rotas[req.url]) {
@@ -20,10 +20,9 @@ function recepcao(req, res) {
         return res.end();
     }
 
-    console.log(req);
 
     //finalizando o processo com uma resposta
-    let resultado = rotas[req.url][req.method]('dados');
+    let resultado = await rotas[req.url][req.method]('dados');
 
     res.end(JSON.stringify(resultado));
 }

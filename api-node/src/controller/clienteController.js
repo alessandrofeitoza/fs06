@@ -1,17 +1,7 @@
-function listar() {
-    let dados = []; // SELECT * FROM tb_veiculos;
+const database = require('../connection/databaseConnection');
 
-    //simulando que estamos buscando dados em um banco de dados
-    for (let i = 1; i <= 10; i++) {
-        dados.push({
-            id: i,
-            nome: 'Chiquim',
-            email: 'cliente0'+i+'@gmail.com',
-            cidade: 'Fortaleza',
-        });
-    }
-
-    return dados;
+async function listar() {
+    return await database.executar('SELECT * FROM tb_cliente');
 }
 
 function cadastrar() {
